@@ -1,0 +1,261 @@
+server:
+  host: "127.0.0.1"
+  port: 9876
+  log_level: "info"
+
+default_format: "openai"
+
+providers:
+  openai:
+    enabled: true
+    base_url: "https://api.openai.com/v1"
+    api_key: "${OPENAI_API_KEY}"
+    format: openai
+    models: [gpt-4o, gpt-4o-mini, gpt-4.1, o3, o4-mini]
+    fallbacks: [azure]
+    timeout_sec: 60
+    max_retries: 2
+
+  anthropic:
+    enabled: true
+    base_url: "https://api.anthropic.com"
+    api_key: "${ANTHROPIC_API_KEY}"
+    format: anthropic
+    extra_headers:
+      anthropic-version: "2023-06-01"
+    models: [claude-sonnet-4, claude-opus-4, claude-haiku-4]
+    fallbacks: [vertex, bedrock]
+    timeout_sec: 120
+    max_retries: 2
+
+  gemini:
+    enabled: true
+    base_url: "https://generativelanguage.googleapis.com/v1beta"
+    api_key: "${GEMINI_API_KEY}"
+    format: gemini
+    models: [gemini-2.5-pro, gemini-2.5-flash]
+
+  mistral:
+    enabled: true
+    base_url: "https://api.mistral.ai/v1"
+    api_key: "${MISTRAL_API_KEY}"
+    format: openai
+    models: [mistral-large-latest, mistral-small, codestral, pixtral]
+
+  cohere:
+    enabled: true
+    base_url: "https://api.cohere.com/v2"
+    api_key: "${COHERE_API_KEY}"
+    format: cohere
+    models: [command-r, command-r-plus]
+
+  meta:
+    enabled: true
+    base_url: "https://api.llama.com/v1"
+    api_key: "${META_API_KEY}"
+    format: openai
+    models: [llama-4-maverick, llama-4-scout, llama-3.3-70b]
+
+  xai:
+    enabled: true
+    base_url: "https://api.x.ai/v1"
+    api_key: "${XAI_API_KEY}"
+    format: openai
+    models: [grok-4, grok-3-mini]
+
+  deepseek:
+    enabled: true
+    base_url: "https://api.deepseek.com/v1"
+    api_key: "${DEEPSEEK_API_KEY}"
+    format: openai
+    models: [deepseek-chat, deepseek-reasoner]
+
+  groq:
+    enabled: true
+    base_url: "https://api.groq.com/openai/v1"
+    api_key: "${GROQ_API_KEY}"
+    format: openai
+    models: [llama-3.3-70b-versatile, mixtral-8x7b, gemma2]
+
+  together:
+    enabled: true
+    base_url: "https://api.together.xyz/v1"
+    api_key: "${TOGETHER_API_KEY}"
+    format: openai
+
+  fireworks:
+    enabled: true
+    base_url: "https://api.fireworks.ai/inference/v1"
+    api_key: "${FIREWORKS_API_KEY}"
+    format: openai
+
+  perplexity:
+    enabled: true
+    base_url: "https://api.perplexity.ai"
+    api_key: "${PERPLEXITY_API_KEY}"
+    format: openai
+    models: [sonar, sonar-pro, sonar-reasoning]
+
+  azure:
+    enabled: true
+    base_url: "https://${AZURE_RESOURCE}.openai.azure.com/openai/deployments/${AZURE_DEPLOYMENT}"
+    api_key: "${AZURE_API_KEY}"
+    format: openai
+    extra_headers:
+      api-key: "${AZURE_API_KEY}"
+
+  bedrock:
+    enabled: false
+    base_url: "https://bedrock-runtime.${AWS_REGION}.amazonaws.com"
+    api_key: "${AWS_ACCESS_KEY_ID}:${AWS_SECRET_ACCESS_KEY}"
+    format: bedrock
+
+  openrouter:
+    enabled: true
+    base_url: "https://openrouter.ai/api/v1"
+    api_key: "${OPENROUTER_API_KEY}"
+    format: openai
+
+  alibaba:
+    enabled: true
+    base_url: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+    api_key: "${ALIBABA_API_KEY}"
+    format: openai
+    models: [qwen-max, qwen-plus, qwen-coder-plus]
+
+  baidu:
+    enabled: true
+    base_url: "https://qianfan.baidubce.com/v2"
+    api_key: "${BAIDU_API_KEY}"
+    format: openai
+    models: [ernie-4.5, ernie-x1]
+
+  zhipu:
+    enabled: true
+    base_url: "https://open.bigmodel.cn/api/paas/v4"
+    api_key: "${ZHIPU_API_KEY}"
+    format: openai
+    models: [glm-4.6, glm-4.5-air]
+
+  moonshot:
+    enabled: true
+    base_url: "https://api.moonshot.cn/v1"
+    api_key: "${MOONSHOT_API_KEY}"
+    format: openai
+    models: [kimi-k2, moonshot-v1-128k]
+
+  watsonx:
+    enabled: false
+    base_url: "https://${WATSONX_REGION}.ml.cloud.ibm.com/ml/v1/text/chat"
+    api_key: "${WATSONX_API_KEY}"
+    format: watsonx
+
+  azure_foundry:
+    enabled: true
+    base_url: "https://${AZURE_FOUNDRY_RESOURCE}.services.ai.azure.com/models"
+    api_key: "${AZURE_FOUNDRY_API_KEY}"
+    format: openai
+
+  nvidia:
+    enabled: true
+    base_url: "https://integrate.api.nvidia.com/v1"
+    api_key: "${NVIDIA_API_KEY}"
+    format: openai
+
+  deepinfra:
+    enabled: true
+    base_url: "https://api.deepinfra.com/v1/openai"
+    api_key: "${DEEPINFRA_API_KEY}"
+    format: openai
+
+  replicate:
+    enabled: false
+    base_url: "https://api.replicate.com/v1"
+    api_key: "${REPLICATE_API_KEY}"
+    format: replicate
+
+  huggingface:
+    enabled: true
+    base_url: "https://router.huggingface.co/v1"
+    api_key: "${HUGGINGFACE_API_KEY}"
+    format: openai
+
+  ollama:
+    enabled: true
+    base_url: "http://localhost:11434/v1"
+    api_key: ""
+    format: openai
+    models: [llama3, qwen2.5, mistral, codestral]
+
+  lmstudio:
+    enabled: true
+    base_url: "http://localhost:1234/v1"
+    api_key: ""
+    format: openai
+
+  ai21:
+    enabled: true
+    base_url: "https://api.ai21.com/studio/v1"
+    api_key: "${AI21_API_KEY}"
+    format: openai
+    models: [jamba-large, jamba-mini]
+
+  sambanova:
+    enabled: true
+    base_url: "https://api.sambanova.ai/v1"
+    api_key: "${SAMBANOVA_API_KEY}"
+    format: openai
+
+  vertex:
+    enabled: false
+    base_url: "https://${VERTEX_REGION}-aiplatform.googleapis.com/v1"
+    api_key: "${VERTEX_ACCESS_TOKEN}"
+    format: gemini
+
+models:
+  - pattern: "gpt-"
+    provider: openai
+  - pattern: "o3"
+    provider: openai
+  - pattern: "o4"
+    provider: openai
+  - pattern: "claude-"
+    provider: anthropic
+  - pattern: "gemini-"
+    provider: gemini
+  - pattern: "mistral-"
+    provider: mistral
+  - pattern: "codestral"
+    provider: mistral
+  - pattern: "pixtral"
+    provider: mistral
+  - pattern: "command-"
+    provider: cohere
+  - pattern: "llama-"
+    provider: meta
+  - pattern: "grok-"
+    provider: xai
+  - pattern: "deepseek-"
+    provider: deepseek
+  - pattern: "mixtral"
+    provider: groq
+  - pattern: "gemma"
+    provider: groq
+  - pattern: "sonar"
+    provider: perplexity
+  - pattern: "qwen-"
+    provider: alibaba
+  - pattern: "ernie-"
+    provider: baidu
+  - pattern: "glm-"
+    provider: zhipu
+  - pattern: "kimi-"
+    provider: moonshot
+  - pattern: "jamba"
+    provider: ai21
+
+endpoints:
+  - path: "/v1/chat/completions"
+    format: openai
+  - path: "/v1/messages"
+    format: anthropic
